@@ -15,15 +15,16 @@ module Exercise
         end
       end
 
-      def search(_array, _query, left = 0, right = _array.length - 1)
+      def search(array, query, left = 0, right = array.length - 1)
         return -1 if left > right
-        current_index = left + ((right - left) / 2)
-        if _array[current_index] == _query
-          current_index
-        elsif _array[current_index] > _query
-          search(_array, _query, left, current_index - 1)
+
+        middle = left + ((right - left) / 2)
+        return middle if array[middle] == query
+        
+        if array[middle] > query
+          search(array, query, left, middle - 1)
         else
-          search(_array, _query, current_index + 1, right)
+          search(array, query, middle + 1, right)
         end
       end
     end
