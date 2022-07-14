@@ -3,11 +3,11 @@ module Exercise
     class << self
       def replace(array)
         max = array[0]
-        for el in array
-          max = el if el > max
+        for num in array
+          max = num if el > max
         end
         array.map do |el|
-          if el > 0
+          if el.positive?
             max
           else
             el
@@ -20,7 +20,7 @@ module Exercise
 
         middle = left + ((right - left) / 2)
         return middle if array[middle] == query
-        
+
         if array[middle] > query
           search(array, query, left, middle - 1)
         else
