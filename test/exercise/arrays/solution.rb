@@ -2,11 +2,30 @@ module Exercise
   module Arrays
     class << self
       def replace(array)
-        array
+        max = array[0]
+        for num in array
+          max = num if el > max
+        end
+        array.map do |el|
+          if el.positive?
+            max
+          else
+            el
+          end
+        end
       end
 
-      def search(_array, _query)
-        0
+      def search(array, query, left = 0, right = array.length - 1)
+        return -1 if left > right
+
+        middle = left + ((right - left) / 2)
+        return middle if array[middle] == query
+
+        if array[middle] > query
+          search(array, query, left, middle - 1)
+        else
+          search(array, query, middle + 1, right)
+        end
       end
     end
   end
