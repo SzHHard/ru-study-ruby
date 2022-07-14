@@ -13,18 +13,12 @@ module Exercise
 
       # Написать свою функцию my_map
       def my_map
-        modified_array = self.class.new(self)
-        for i in (0...length)
-          modified_array[i] = yield self[i]
-        end
-        modified_array
+        my_reduce(self.class.new([])) { |acc, current| acc << (yield current) }
       end
 
       # Написать свою функцию my_compact
       def my_compact
-        new_arr = self.class.new([])
-        my_each { |el| !el.nil? && new_arr.push(el) }
-        new_arr
+        my_reduce(self.class.new([])) { |acc, current| current.nil? ? acc : acc << current }
       end
 
       # Написать свою функцию my_reduce
